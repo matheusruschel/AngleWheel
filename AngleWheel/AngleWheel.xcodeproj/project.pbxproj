@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2C54C85421F00E06001DCE8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C85321F00E06001DCE8C /* AppDelegate.swift */; };
+		2C54C85621F00E06001DCE8C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C85521F00E06001DCE8C /* ViewController.swift */; };
+		2C54C85921F00E06001DCE8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C54C85721F00E06001DCE8C /* Main.storyboard */; };
+		2C54C85B21F00E08001DCE8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C54C85A21F00E08001DCE8C /* Assets.xcassets */; };
+		2C54C85E21F00E08001DCE8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C54C85C21F00E08001DCE8C /* LaunchScreen.storyboard */; };
+		2C54C86921F00E08001DCE8C /* AngleWheelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C86821F00E08001DCE8C /* AngleWheelTests.swift */; };
+		2C54C87421F00E08001DCE8C /* AngleWheelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C87321F00E08001DCE8C /* AngleWheelUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2C54C86521F00E08001DCE8C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C54C84821F00E06001DCE8C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C54C84F21F00E06001DCE8C;
+			remoteInfo = AngleWheel;
+		};
+		2C54C87021F00E08001DCE8C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C54C84821F00E06001DCE8C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C54C84F21F00E06001DCE8C;
+			remoteInfo = AngleWheel;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2C54C85021F00E06001DCE8C /* AngleWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AngleWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C54C85321F00E06001DCE8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2C54C85521F00E06001DCE8C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2C54C85821F00E06001DCE8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2C54C85A21F00E08001DCE8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2C54C85D21F00E08001DCE8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2C54C85F21F00E08001DCE8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C54C86421F00E08001DCE8C /* AngleWheelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AngleWheelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C54C86821F00E08001DCE8C /* AngleWheelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleWheelTests.swift; sourceTree = "<group>"; };
+		2C54C86A21F00E08001DCE8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C54C86F21F00E08001DCE8C /* AngleWheelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AngleWheelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C54C87321F00E08001DCE8C /* AngleWheelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleWheelUITests.swift; sourceTree = "<group>"; };
+		2C54C87521F00E08001DCE8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2C54C84D21F00E06001DCE8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C54C86121F00E08001DCE8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C54C86C21F00E08001DCE8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2C54C84721F00E06001DCE8C = {
+			isa = PBXGroup;
+			children = (
+				2C54C85221F00E06001DCE8C /* AngleWheel */,
+				2C54C86721F00E08001DCE8C /* AngleWheelTests */,
+				2C54C87221F00E08001DCE8C /* AngleWheelUITests */,
+				2C54C85121F00E06001DCE8C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2C54C85121F00E06001DCE8C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2C54C85021F00E06001DCE8C /* AngleWheel.app */,
+				2C54C86421F00E08001DCE8C /* AngleWheelTests.xctest */,
+				2C54C86F21F00E08001DCE8C /* AngleWheelUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2C54C85221F00E06001DCE8C /* AngleWheel */ = {
+			isa = PBXGroup;
+			children = (
+				2C54C85321F00E06001DCE8C /* AppDelegate.swift */,
+				2C54C85521F00E06001DCE8C /* ViewController.swift */,
+				2C54C85721F00E06001DCE8C /* Main.storyboard */,
+				2C54C85A21F00E08001DCE8C /* Assets.xcassets */,
+				2C54C85C21F00E08001DCE8C /* LaunchScreen.storyboard */,
+				2C54C85F21F00E08001DCE8C /* Info.plist */,
+			);
+			path = AngleWheel;
+			sourceTree = "<group>";
+		};
+		2C54C86721F00E08001DCE8C /* AngleWheelTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C54C86821F00E08001DCE8C /* AngleWheelTests.swift */,
+				2C54C86A21F00E08001DCE8C /* Info.plist */,
+			);
+			path = AngleWheelTests;
+			sourceTree = "<group>";
+		};
+		2C54C87221F00E08001DCE8C /* AngleWheelUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2C54C87321F00E08001DCE8C /* AngleWheelUITests.swift */,
+				2C54C87521F00E08001DCE8C /* Info.plist */,
+			);
+			path = AngleWheelUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2C54C84F21F00E06001DCE8C /* AngleWheel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C54C87821F00E08001DCE8C /* Build configuration list for PBXNativeTarget "AngleWheel" */;
+			buildPhases = (
+				2C54C84C21F00E06001DCE8C /* Sources */,
+				2C54C84D21F00E06001DCE8C /* Frameworks */,
+				2C54C84E21F00E06001DCE8C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AngleWheel;
+			productName = AngleWheel;
+			productReference = 2C54C85021F00E06001DCE8C /* AngleWheel.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2C54C86321F00E08001DCE8C /* AngleWheelTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C54C87B21F00E08001DCE8C /* Build configuration list for PBXNativeTarget "AngleWheelTests" */;
+			buildPhases = (
+				2C54C86021F00E08001DCE8C /* Sources */,
+				2C54C86121F00E08001DCE8C /* Frameworks */,
+				2C54C86221F00E08001DCE8C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C54C86621F00E08001DCE8C /* PBXTargetDependency */,
+			);
+			name = AngleWheelTests;
+			productName = AngleWheelTests;
+			productReference = 2C54C86421F00E08001DCE8C /* AngleWheelTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2C54C86E21F00E08001DCE8C /* AngleWheelUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C54C87E21F00E08001DCE8C /* Build configuration list for PBXNativeTarget "AngleWheelUITests" */;
+			buildPhases = (
+				2C54C86B21F00E08001DCE8C /* Sources */,
+				2C54C86C21F00E08001DCE8C /* Frameworks */,
+				2C54C86D21F00E08001DCE8C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C54C87121F00E08001DCE8C /* PBXTargetDependency */,
+			);
+			name = AngleWheelUITests;
+			productName = AngleWheelUITests;
+			productReference = 2C54C86F21F00E08001DCE8C /* AngleWheelUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2C54C84821F00E06001DCE8C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Matheus Ruschel";
+				TargetAttributes = {
+					2C54C84F21F00E06001DCE8C = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					2C54C86321F00E08001DCE8C = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 2C54C84F21F00E06001DCE8C;
+					};
+					2C54C86E21F00E08001DCE8C = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 2C54C84F21F00E06001DCE8C;
+					};
+				};
+			};
+			buildConfigurationList = 2C54C84B21F00E06001DCE8C /* Build configuration list for PBXProject "AngleWheel" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2C54C84721F00E06001DCE8C;
+			productRefGroup = 2C54C85121F00E06001DCE8C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2C54C84F21F00E06001DCE8C /* AngleWheel */,
+				2C54C86321F00E08001DCE8C /* AngleWheelTests */,
+				2C54C86E21F00E08001DCE8C /* AngleWheelUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2C54C84E21F00E06001DCE8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C54C85E21F00E08001DCE8C /* LaunchScreen.storyboard in Resources */,
+				2C54C85B21F00E08001DCE8C /* Assets.xcassets in Resources */,
+				2C54C85921F00E06001DCE8C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C54C86221F00E08001DCE8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C54C86D21F00E08001DCE8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2C54C84C21F00E06001DCE8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C54C85621F00E06001DCE8C /* ViewController.swift in Sources */,
+				2C54C85421F00E06001DCE8C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C54C86021F00E08001DCE8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C54C86921F00E08001DCE8C /* AngleWheelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C54C86B21F00E08001DCE8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C54C87421F00E08001DCE8C /* AngleWheelUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2C54C86621F00E08001DCE8C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C54C84F21F00E06001DCE8C /* AngleWheel */;
+			targetProxy = 2C54C86521F00E08001DCE8C /* PBXContainerItemProxy */;
+		};
+		2C54C87121F00E08001DCE8C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C54C84F21F00E06001DCE8C /* AngleWheel */;
+			targetProxy = 2C54C87021F00E08001DCE8C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2C54C85721F00E06001DCE8C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C54C85821F00E06001DCE8C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2C54C85C21F00E08001DCE8C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C54C85D21F00E08001DCE8C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2C54C87621F00E08001DCE8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2C54C87721F00E08001DCE8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2C54C87921F00E08001DCE8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P9BMV4WXD2;
+				INFOPLIST_FILE = AngleWheel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.matheusruschel.AngleWheel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2C54C87A21F00E08001DCE8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P9BMV4WXD2;
+				INFOPLIST_FILE = AngleWheel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.matheusruschel.AngleWheel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2C54C87C21F00E08001DCE8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = AngleWheelTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.matheusruschel.AngleWheelTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AngleWheel.app/AngleWheel";
+			};
+			name = Debug;
+		};
+		2C54C87D21F00E08001DCE8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = AngleWheelTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.matheusruschel.AngleWheelTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AngleWheel.app/AngleWheel";
+			};
+			name = Release;
+		};
+		2C54C87F21F00E08001DCE8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = AngleWheelUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.matheusruschel.AngleWheelUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AngleWheel;
+			};
+			name = Debug;
+		};
+		2C54C88021F00E08001DCE8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = AngleWheelUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.matheusruschel.AngleWheelUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AngleWheel;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2C54C84B21F00E06001DCE8C /* Build configuration list for PBXProject "AngleWheel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C54C87621F00E08001DCE8C /* Debug */,
+				2C54C87721F00E08001DCE8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C54C87821F00E08001DCE8C /* Build configuration list for PBXNativeTarget "AngleWheel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C54C87921F00E08001DCE8C /* Debug */,
+				2C54C87A21F00E08001DCE8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C54C87B21F00E08001DCE8C /* Build configuration list for PBXNativeTarget "AngleWheelTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C54C87C21F00E08001DCE8C /* Debug */,
+				2C54C87D21F00E08001DCE8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C54C87E21F00E08001DCE8C /* Build configuration list for PBXNativeTarget "AngleWheelUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C54C87F21F00E08001DCE8C /* Debug */,
+				2C54C88021F00E08001DCE8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2C54C84821F00E06001DCE8C /* Project object */;
+}
