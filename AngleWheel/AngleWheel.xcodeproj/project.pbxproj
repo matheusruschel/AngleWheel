@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		2C54C85421F00E06001DCE8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C85321F00E06001DCE8C /* AppDelegate.swift */; };
-		2C54C85621F00E06001DCE8C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C85521F00E06001DCE8C /* ViewController.swift */; };
 		2C54C85921F00E06001DCE8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C54C85721F00E06001DCE8C /* Main.storyboard */; };
 		2C54C85B21F00E08001DCE8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C54C85A21F00E08001DCE8C /* Assets.xcassets */; };
 		2C54C85E21F00E08001DCE8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C54C85C21F00E08001DCE8C /* LaunchScreen.storyboard */; };
 		2C54C86921F00E08001DCE8C /* AngleWheelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C86821F00E08001DCE8C /* AngleWheelTests.swift */; };
 		2C54C87421F00E08001DCE8C /* AngleWheelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C87321F00E08001DCE8C /* AngleWheelUITests.swift */; };
+		2C54C88221F00EA6001DCE8C /* AngleWheelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C88121F00EA6001DCE8C /* AngleWheelViewController.swift */; };
+		2C54C88421F01000001DCE8C /* CircularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C88321F01000001DCE8C /* CircularView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,6 @@
 /* Begin PBXFileReference section */
 		2C54C85021F00E06001DCE8C /* AngleWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AngleWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C54C85321F00E06001DCE8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2C54C85521F00E06001DCE8C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2C54C85821F00E06001DCE8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C54C85A21F00E08001DCE8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C54C85D21F00E08001DCE8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +47,8 @@
 		2C54C86F21F00E08001DCE8C /* AngleWheelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AngleWheelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C54C87321F00E08001DCE8C /* AngleWheelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleWheelUITests.swift; sourceTree = "<group>"; };
 		2C54C87521F00E08001DCE8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C54C88121F00EA6001DCE8C /* AngleWheelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleWheelViewController.swift; sourceTree = "<group>"; };
+		2C54C88321F01000001DCE8C /* CircularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +100,12 @@
 			isa = PBXGroup;
 			children = (
 				2C54C85321F00E06001DCE8C /* AppDelegate.swift */,
-				2C54C85521F00E06001DCE8C /* ViewController.swift */,
 				2C54C85721F00E06001DCE8C /* Main.storyboard */,
 				2C54C85A21F00E08001DCE8C /* Assets.xcassets */,
 				2C54C85C21F00E08001DCE8C /* LaunchScreen.storyboard */,
 				2C54C85F21F00E08001DCE8C /* Info.plist */,
+				2C54C88121F00EA6001DCE8C /* AngleWheelViewController.swift */,
+				2C54C88321F01000001DCE8C /* CircularView.swift */,
 			);
 			path = AngleWheel;
 			sourceTree = "<group>";
@@ -256,8 +259,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C54C85621F00E06001DCE8C /* ViewController.swift in Sources */,
+				2C54C88221F00EA6001DCE8C /* AngleWheelViewController.swift in Sources */,
 				2C54C85421F00E06001DCE8C /* AppDelegate.swift in Sources */,
+				2C54C88421F01000001DCE8C /* CircularView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
