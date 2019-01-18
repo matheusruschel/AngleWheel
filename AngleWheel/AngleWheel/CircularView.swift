@@ -12,19 +12,19 @@ import UIKit
 
     @IBInspectable let lineWidth: CGFloat = 5
     @IBInspectable let lineColor: UIColor = .blue
-    let offset: CGFloat = 10
+    let radius: CGFloat = 125
     
     override func draw(_ rect: CGRect) {
-        let newRect = CGRect(
-            x: rect.minX + offset/2,
-            y: rect.minY + offset/2,
-            width: rect.width - offset,
-            height: rect.height - offset
-        )
-        let path = UIBezierPath(ovalIn: newRect)
+        let path = UIBezierPath(arcCenter: CGPoint(x: rect.midX,y: rect.midY),
+                                radius: radius,
+                                startAngle: CGFloat(0),
+                                endAngle:CGFloat(Double.pi * 2),
+                                clockwise: true)
         lineColor.setStroke()
         path.lineWidth = lineWidth
         path.stroke()
+        backgroundColor = .clear
     }
+
 
 }
