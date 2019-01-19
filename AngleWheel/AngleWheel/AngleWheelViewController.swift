@@ -8,8 +8,12 @@
 
 import UIKit
 
+protocol AngleWheelDelegate: class {
+    func didChangeAngleValue(value: Int)
+}
+
 class AngleWheelViewController: UIViewController {
-    
+    static let identifier = "AngleWheelViewController"
     var circularView: CircularView!
     var buttonAngle: UIButton!
     var buttonAngleLocation: CGPoint = CGPoint.zero
@@ -20,7 +24,7 @@ class AngleWheelViewController: UIViewController {
     var timer: Timer!
     var timerCount = 0
     var updatedAngle = 0
-    static let identifier = "AngleWheelViewController"
+    weak var angleWheelDelegate: AngleWheelDelegate?
     
     class func initialize(radius: Double, min: Int, max: Int, initialValue: Int) -> AngleWheelViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -92,10 +96,11 @@ class AngleWheelViewController: UIViewController {
         let x2 = midViewXDouble + cos(angle)*radius
         let y2 = midViewYDouble + sin(angle)*radius
         buttonAngle.center = CGPoint(x: x2,y: y2)
-        let angle2 = pointToDegreesAngle(point: buttonAngleLocation)
-        buttonAnglePosition = Int(angle2)
-        buttonAngle.setTitle(String("\(angle2)".prefix(3)), for: .normal)
+        let angle2 = Int(pointToDegreesAngle(point: buttonAngleLocation))
+        buttonAnglePosition = angle2
+        buttonAngle.setTitle("\(angle2)", for: .normal)
         recognizer.setTranslation(.zero, in: buttonAngle)
+        angleWheelDelegate?.didChangeAngleValue(value: angle2)
     }
     
     @objc func buttonAnglePressed() {

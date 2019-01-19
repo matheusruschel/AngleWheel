@@ -18,6 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="efg-V3-tSA">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAM-UF-ly1">
                                 <rect key="frame" x="37.5" y="39" width="300" height="300"/>
                                 <constraints>
@@ -29,7 +32,7 @@
                             </containerView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gdR-dJ-hnq">
                                 <rect key="frame" x="0.0" y="382" width="375" height="285"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="285" id="3hf-8M-lRu"/>
                                 </constraints>
@@ -56,14 +59,19 @@
                             <constraint firstItem="WAM-UF-ly1" firstAttribute="width" secondItem="YtA-3v-boX" secondAttribute="width" multiplier="0.8" id="0Ll-bW-6mK"/>
                             <constraint firstItem="gdR-dJ-hnq" firstAttribute="leading" secondItem="UxD-Nh-Y3g" secondAttribute="leading" id="5eC-By-hkh"/>
                             <constraint firstItem="WAM-UF-ly1" firstAttribute="top" secondItem="UxD-Nh-Y3g" secondAttribute="top" constant="19" id="H9d-LM-bNe"/>
+                            <constraint firstItem="efg-V3-tSA" firstAttribute="leading" secondItem="UxD-Nh-Y3g" secondAttribute="leading" id="JWD-b1-Exf"/>
+                            <constraint firstItem="UxD-Nh-Y3g" firstAttribute="bottom" secondItem="efg-V3-tSA" secondAttribute="bottom" id="Kpf-bw-bfW"/>
                             <constraint firstItem="WAM-UF-ly1" firstAttribute="centerX" secondItem="UxD-Nh-Y3g" secondAttribute="centerX" id="UNJ-Ez-w0l"/>
                             <constraint firstItem="UxD-Nh-Y3g" firstAttribute="trailing" secondItem="gdR-dJ-hnq" secondAttribute="trailing" id="Ual-uI-t3U"/>
+                            <constraint firstItem="UxD-Nh-Y3g" firstAttribute="trailing" secondItem="efg-V3-tSA" secondAttribute="trailing" id="ZnK-c0-ZvV"/>
+                            <constraint firstItem="efg-V3-tSA" firstAttribute="top" secondItem="UxD-Nh-Y3g" secondAttribute="top" id="qb6-pm-KEy"/>
                             <constraint firstItem="UxD-Nh-Y3g" firstAttribute="bottom" secondItem="gdR-dJ-hnq" secondAttribute="bottom" id="x37-c2-JgA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UxD-Nh-Y3g"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="gdR-dJ-hnq" id="wNG-BD-D3w"/>
+                        <outlet property="imageViewBackground" destination="efg-V3-tSA" id="ZbM-iz-PBQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7a-vq-3Lh" userLabel="First Responder" sceneMemberID="firstResponder"/>

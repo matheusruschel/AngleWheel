@@ -7,29 +7,63 @@
 //
 
 import UIKit
+import Photos
 
 class MainViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-
+    @IBOutlet weak var imageViewBackground: UIImageView!
+    let imageManager = ImageManager()
+    var numberOfImages = 0
+    var currentSection = 0
+    var cellSize: CGFloat!
+    weak var angleWheelViewController: AngleWheelViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "PhotoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PhotoCollectionViewCell")
+        angleWheelViewController = children[0] as? AngleWheelViewController ?? AngleWheelViewController()
+        angleWheelViewController.angleWheelDelegate = self
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupViewInitialState()
+    }
+    
+    func setupViewInitialState() {
+        cellSize = (collectionView.frame.size.width/3) - 3
+        numberOfImages = imageManager.loadAssets(numberOfImages: Int.random(in: 1...3))
+        self.collectionView.reloadData()
+        imageManager.imageForAsset(assetAtIndex: 0,
+                                   forImageSize: CGSize(width: cellSize,
+                                                        height: cellSize),
+                                   completion: {  (result) in
+                                    self.imageViewBackground.image = result
+        })
+    }
+    
+    func sectionForAngle(angle: Int) -> Int {
+        let totalSections = numberOfImages
+        return Int(floor(Double(angle) / 360.0 * Double(totalSections)))
+    }
 }
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return numberOfImages
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell {
-            
-            cell.backgroundColor = .red
+            imageManager.imageForAsset(assetAtIndex: indexPath.row,
+                                       forImageSize: CGSize(width: cellSize,
+                                       height: cellSize),
+                                       completion: {  (result) in
+                                        cell.imageViewPhoto.image = result
+            })
             
             return cell
         }
@@ -50,5 +84,15 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
                          sizeForItemAt indexPath: IndexPath) -> CGSize{
         let cellLeg = (collectionView.frame.size.width/3) - 3
         return CGSize(width: cellLeg,height: cellLeg)
+    }
+}
+extension MainViewController: AngleWheelDelegate {
+    func didChangeAngleValue(value: Int) {
+        let newSection = sectionForAngle(angle: value)
+        
+        if newSection != currentSection {
+            currentSection = newSection
+            imageViewBackground.image = imageManager.images[newSection]
+        }
     }
 }
