@@ -13,10 +13,32 @@ class AngleWheelViewController: UIViewController {
     var circularView: CircularView!
     var buttonAngle: UIButton!
     var buttonAngleLocation: CGPoint = CGPoint.zero
-    let radius: Double = 125.0
+    var radius: Double = 125.0
+    var min: Int = 0
+    var max: Int = 360
+    var buttonAnglePosition: Int = 0
+    var timer: Timer!
+    var timerCount = 0
+    var updatedAngle = 0
+    static let identifier = "AngleWheelViewController"
+    
+    class func initialize(radius: Double, min: Int, max: Int, initialValue: Int) -> AngleWheelViewController {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let angleWheelViewController = storyBoard.instantiateViewController(withIdentifier: identifier) as?
+            AngleWheelViewController ?? AngleWheelViewController()
+        angleWheelViewController.radius = radius
+        angleWheelViewController.min = min
+        angleWheelViewController.max = max
+        angleWheelViewController.buttonAnglePosition = initialValue
+        return angleWheelViewController
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupViews()
     }
     
@@ -26,10 +48,11 @@ class AngleWheelViewController: UIViewController {
     }
     
     func setupCircularView() {
-        circularView = CircularView(frame: CGRect(x: 0,
-                                                  y: view.bounds.height * 0.1,
-                                                  width: view.bounds.width * 0.7,
-                                                  height: view.bounds.width * 0.7))
+        circularView = CircularView(radius: radius)
+        circularView.frame = CGRect(x: 0,
+                                    y: 0 ,
+                                    width: view.bounds.width ,
+                                    height: view.bounds.width)
         
         circularView.center.x = view.center.x
         circularView.backgroundColor = .clear
@@ -44,8 +67,8 @@ class AngleWheelViewController: UIViewController {
                                              width: 40,
                                              height: 40))
         
-        buttonAngle.center = angleToPoint(angle: 0)
-        buttonAngle.setTitle("0", for: .normal)
+        buttonAngle.center = degreesAngleToPoint(angle: Float(buttonAnglePosition))
+        buttonAngle.setTitle("\(buttonAnglePosition)", for: .normal)
         buttonAngle.addTarget(self, action: #selector(buttonAnglePressed), for: .touchUpInside)
         buttonAngle.setTitleColor(.black, for: .normal)
         buttonAngle.backgroundColor = .red
@@ -69,23 +92,70 @@ class AngleWheelViewController: UIViewController {
         let x2 = midViewXDouble + cos(angle)*radius
         let y2 = midViewYDouble + sin(angle)*radius
         buttonAngle.center = CGPoint(x: x2,y: y2)
-        let angle2 = pointToAngle(point: buttonAngleLocation)
+        let angle2 = pointToDegreesAngle(point: buttonAngleLocation)
+        buttonAnglePosition = Int(angle2)
         buttonAngle.setTitle(String("\(angle2)".prefix(3)), for: .normal)
         recognizer.setTranslation(.zero, in: buttonAngle)
     }
     
     @objc func buttonAnglePressed() {
-        let randomAngle = Int.random(in: 0...360)
-        buttonAngle.setTitle(String("\(randomAngle)".prefix(3)), for: .normal)
-        let point = angleToPoint(angle: Float(randomAngle))
+        let circlePath = UIBezierPath(arcCenter: circularView.center,
+                                      radius: CGFloat(radius),
+                                      startAngle: CGFloat(Double(buttonAnglePosition).degreesToRadians()),
+                                      endAngle: Math().percentToRadians(startAngle: CGFloat(Double(buttonAnglePosition).degreesToRadians()),percentComplete: 100),
+                                      clockwise: true)
+    
+        updatedAngle = buttonAnglePosition
+        //CATransaction.begin()
+        let repeatCount = Int.random(in: 1...5)
+        let animationRandomLoops = CAKeyframeAnimation(keyPath: "position")
+        animationRandomLoops.delegate = self
+        animationRandomLoops.duration = 3
+        animationRandomLoops.repeatCount = 3
+        animationRandomLoops.path = circlePath.cgPath
+        buttonAngle.layer.add(animationRandomLoops, forKey: nil)
+        self.timerCount = 0
+        buttonAngle.center = degreesAngleToPoint(angle: Float(buttonAnglePosition))
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: {_ in
+            
+            self.timerCount += 1
+            
+            if self.timerCount >= 90 {
+                self.timer.invalidate()
+                return
+            }
+            self.updatedAngle += 12
+            
+            if self.updatedAngle >= 360 {
+                self.updatedAngle = 0
+            }
+            
+            self.buttonAngle.setTitle("\(self.updatedAngle)", for: .normal)
+        })
+        //let randomAngle = Int.random(in: 0...360)
+        //buttonAngle.setTitle(String("\(Int(randomAngle))".prefix(3)), for: .normal)
+        //CATransaction.commit()
         
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
-            self.buttonAngle.center = point
-        }, completion: nil)
-        
+//        CATransaction.begin()
+//        let semiCirclePath = UIBezierPath(arcCenter: circularView.center,
+//                                          radius: CGFloat(radius),
+//                                          startAngle: CGFloat(Double(buttonAnglePosition).degreesToRadians()),
+//                                          endAngle: CGFloat(Double(randomAngle).degreesToRadians()),
+//                                          clockwise: true)
+//        let animation = CAKeyframeAnimation(keyPath: "position")
+//        animation.duration = 1
+//        animation.repeatCount = 1
+//        animation.path = semiCirclePath.cgPath
+//        animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+//        animation.fillMode = .forwards
+//        animation.isRemovedOnCompletion = false
+//        buttonAngle.layer.add(animation, forKey: nil)
+//        buttonAngle.center = degreesAngleToPoint(angle: Float(randomAngle))
+//        buttonAnglePosition = randomAngle
+//        CATransaction.commit()
     }
     
-    func angleToPoint(angle: Float) -> CGPoint {
+    func degreesAngleToPoint(angle: Float) -> CGPoint {
         
         var finalAngle = angle
         if angle < 0 {
@@ -94,7 +164,7 @@ class AngleWheelViewController: UIViewController {
             finalAngle = 360
         }
             
-        let radians = finalAngle * .pi / 180 - 1.57
+        let radians = Double(finalAngle).degreesToRadians()
         let midViewXDouble = circularView.frame.midX
         let midViewYDouble = circularView.frame.midY
         let x: CGFloat = midViewXDouble + CGFloat(radius) * CGFloat(cos(radians))
@@ -102,7 +172,7 @@ class AngleWheelViewController: UIViewController {
         return CGPoint(x: x,y: y)
     }
     
-    func pointToAngle(point: CGPoint) -> Float {
+    func pointToDegreesAngle(point: CGPoint) -> Float {
         let x = self.circularView.center.x
         let y = self.circularView.center.y
         
@@ -110,13 +180,28 @@ class AngleWheelViewController: UIViewController {
         let dy = point.y - y
         
         let radians = atan2f(Float(dy), Float(dx))
-        let degrees = Double(radians) * 180 / -Double.pi - 90
+        let degrees = Double(radians).radiansToDegrees()
         
         if degrees < 0 {
             return fabsf(Float(degrees))
         } else {
             return 360 - Float(degrees)
         }
+    }
+}
+extension AngleWheelViewController: CAAnimationDelegate {
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        self.buttonAngle.setTitle("\(self.buttonAnglePosition)", for: .normal)
+    }
+}
+extension Double {
+    func degreesToRadians() -> Double { return self * .pi / 180 - (.pi/2) }
+    func radiansToDegrees() -> Double { return self * 180 / -Double.pi - 90 }
+}
+class Math {
+    func percentToRadians(startAngle: CGFloat, percentComplete: CGFloat) -> CGFloat {
+        let degrees = (percentComplete/100) * 360
+        return startAngle + (degrees * (.pi/180))
     }
 }
 

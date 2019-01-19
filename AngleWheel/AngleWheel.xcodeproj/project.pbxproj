@@ -15,6 +15,9 @@
 		2C54C87421F00E08001DCE8C /* AngleWheelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C87321F00E08001DCE8C /* AngleWheelUITests.swift */; };
 		2C54C88221F00EA6001DCE8C /* AngleWheelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C88121F00EA6001DCE8C /* AngleWheelViewController.swift */; };
 		2C54C88421F01000001DCE8C /* CircularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C88321F01000001DCE8C /* CircularView.swift */; };
+		2C54C88621F2F051001DCE8C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C88521F2F051001DCE8C /* MainViewController.swift */; };
+		2C54C88921F2FDE3001DCE8C /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54C88721F2FDE3001DCE8C /* PhotoCollectionViewCell.swift */; };
+		2C54C88A21F2FDE3001DCE8C /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C54C88821F2FDE3001DCE8C /* PhotoCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		2C54C87521F00E08001DCE8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C54C88121F00EA6001DCE8C /* AngleWheelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleWheelViewController.swift; sourceTree = "<group>"; };
 		2C54C88321F01000001DCE8C /* CircularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularView.swift; sourceTree = "<group>"; };
+		2C54C88521F2F051001DCE8C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		2C54C88721F2FDE3001DCE8C /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C54C88821F2FDE3001DCE8C /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,9 @@
 				2C54C85F21F00E08001DCE8C /* Info.plist */,
 				2C54C88121F00EA6001DCE8C /* AngleWheelViewController.swift */,
 				2C54C88321F01000001DCE8C /* CircularView.swift */,
+				2C54C88521F2F051001DCE8C /* MainViewController.swift */,
+				2C54C88721F2FDE3001DCE8C /* PhotoCollectionViewCell.swift */,
+				2C54C88821F2FDE3001DCE8C /* PhotoCollectionViewCell.xib */,
 			);
 			path = AngleWheel;
 			sourceTree = "<group>";
@@ -233,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C54C85E21F00E08001DCE8C /* LaunchScreen.storyboard in Resources */,
+				2C54C88A21F2FDE3001DCE8C /* PhotoCollectionViewCell.xib in Resources */,
 				2C54C85B21F00E08001DCE8C /* Assets.xcassets in Resources */,
 				2C54C85921F00E06001DCE8C /* Main.storyboard in Resources */,
 			);
@@ -260,8 +270,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C54C88221F00EA6001DCE8C /* AngleWheelViewController.swift in Sources */,
+				2C54C88921F2FDE3001DCE8C /* PhotoCollectionViewCell.swift in Sources */,
 				2C54C85421F00E06001DCE8C /* AppDelegate.swift in Sources */,
 				2C54C88421F01000001DCE8C /* CircularView.swift in Sources */,
+				2C54C88621F2F051001DCE8C /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

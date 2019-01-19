@@ -10,20 +10,30 @@ import UIKit
 
 @IBDesignable class CircularView: UIView {
 
-    @IBInspectable let lineWidth: CGFloat = 5
-    @IBInspectable let lineColor: UIColor = .blue
-    let radius: CGFloat = 125
+    @IBInspectable let lineWidth: CGFloat = 8
+    @IBInspectable let lineColor: UIColor = .lightGray
+    var radius: Double
+    var path: UIBezierPath!
+    
+    init(radius: Double) {
+        self.radius = radius
+        super.init(frame: CGRect(x:0, y:0, width: 100, height: 100))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.radius = 125
+        super.init(coder: aDecoder)
+    }
     
     override func draw(_ rect: CGRect) {
-        let path = UIBezierPath(arcCenter: CGPoint(x: rect.midX,y: rect.midY),
-                                radius: radius,
+        path = UIBezierPath(arcCenter: CGPoint(x: rect.midX,y: rect.midY),
+                                radius: CGFloat(radius),
                                 startAngle: CGFloat(0),
                                 endAngle:CGFloat(Double.pi * 2),
                                 clockwise: true)
-        lineColor.setStroke()
+        lineColor.withAlphaComponent(0.6).setStroke()
         path.lineWidth = lineWidth
         path.stroke()
-        backgroundColor = .clear
     }
 
 
