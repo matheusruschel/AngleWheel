@@ -15,13 +15,12 @@ enum CameraRollAccessError: Error {
 }
 
 class ImageManager {
-    
     private let manager = PHImageManager.default()
-    let photosAccess = PHPhotoLibrary.authorizationStatus()
     var randomAssets = [PHAsset]()
     
     func loadAssets(numberOfImages: Int) throws -> Int {
         
+        let photosAccess = PHPhotoLibrary.authorizationStatus()
         if photosAccess == .denied || photosAccess == .notDetermined {
             throw CameraRollAccessError.notAllowed
         }

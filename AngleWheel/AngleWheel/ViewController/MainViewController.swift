@@ -13,10 +13,10 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageViewBackground: UIImageView!
+    @IBOutlet weak var labelCameraRollAccessDenied: UILabel!
     let imageManager = ImageManager()
     var numberOfImages = 0
     var currentSection = 0
-    var labelMsgCameraRollAccessNotAllowed: UILabel?
     var indexOfLastSelectedCell = 0
     weak var angleWheelViewController: AngleWheelViewController!
     
@@ -28,43 +28,69 @@ class MainViewController: UIViewController {
         collectionView.register(UINib(nibName: "PhotoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PhotoCollectionViewCell")
         angleWheelViewController = children[0] as? AngleWheelViewController ?? AngleWheelViewController()
         angleWheelViewController.angleWheelDelegate = self
+        labelCameraRollAccessDenied.text = ""
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadImages()
+        PHPhotoLibrary.requestAuthorization({ status in
+            self.loadImages()
+        })
     }
     
     // MARK: - Initialize camera access denied label
     func createCameraAccessDeniedMessage() {
-        labelMsgCameraRollAccessNotAllowed?.removeFromSuperview()
-        labelMsgCameraRollAccessNotAllowed = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 80))
-        labelMsgCameraRollAccessNotAllowed?.text = "Camera roll access was denied."
-        labelMsgCameraRollAccessNotAllowed?.textColor = .black
-        labelMsgCameraRollAccessNotAllowed?.textAlignment = .center
-        self.view.addSubview(labelMsgCameraRollAccessNotAllowed!)
-        labelMsgCameraRollAccessNotAllowed?.center = self.view.center
+        labelCameraRollAccessDenied.text = "Camera roll access was denied."
+        labelCameraRollAccessDenied.textColor = .black
+        labelCameraRollAccessDenied.textAlignment = .center
     }
     
     // MARK: - Load images
     func loadImages() {
-        if let numberOfImages = try? imageManager.loadAssets(numberOfImages: Int.random(in: 10...20)) {
-            self.numberOfImages = numberOfImages
-            self.collectionView.reloadData()
-            imageManager.imageForAsset(assetAtIndex: 0,
-                                       forImageSize: CGSize(width: view.frame.width,
-                                                            height: view.frame.height),
-                                       completion: {  (result) in
-                                        self.imageViewBackground.image = result
-            })
-        } else {
-            createCameraAccessDeniedMessage()
+        DispatchQueue.main.async {
+            if let numberOfImages = try? self.imageManager.loadAssets(numberOfImages: Int.random(in: 10...20)) {
+                self.numberOfImages = numberOfImages
+                self.collectionView.reloadData()
+                self.imageManager.imageForAsset(assetAtIndex: 0,
+                                           forImageSize: CGSize(width: self.view.frame.width,
+                                                                height: self.view.frame.height),
+                                           completion: {  (result) in
+                                            self.imageViewBackground.image = result
+                })
+            } else {
+                self.createCameraAccessDeniedMessage()
+            }
         }
     }
     
     func sectionForAngle(angle: Float) -> Int {
         let totalSections = numberOfImages
         return Int(floor(angle / 360.0 * Float(totalSections)))
+    }
+    
+    func updateViewBasedOnButtonAngle(angle: Float) {
+        let newSection = sectionForAngle(angle: angle)
+        
+        if newSection != currentSection && newSection < imageManager.randomAssets.count {
+            indexOfLastSelectedCell = currentSection
+            currentSection = newSection
+            DispatchQueue.main.async {
+                if newSection == self.indexOfLastSelectedCell {
+                    self.collectionView.reloadItems(at: [IndexPath(item: newSection, section: 0)])
+                } else {
+                    self.collectionView.reloadItems(at: [IndexPath(item: newSection, section: 0)])
+                    self.collectionView.reloadItems(at: [IndexPath(item: self.indexOfLastSelectedCell, section: 0)])
+                }
+                
+                self.imageManager.imageForAsset(assetAtIndex: newSection,
+                                                forImageSize: CGSize(width: self.view.frame.width,
+                                                                     height: self.view.frame.height),
+                                                completion: { result in
+                                                    self.imageViewBackground.image = result
+                                                    
+                })
+            }
+        }
     }
 }
 // MARK: - Collection view delegate/datasource
@@ -122,27 +148,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 // MARK: AngleWheelDelegate
 extension MainViewController: AngleWheelDelegate {
     func didChangeAngleValue(value: Float) {
-        let newSection = sectionForAngle(angle: value)
-        
-        if newSection != currentSection && newSection < imageManager.randomAssets.count {
-            indexOfLastSelectedCell = currentSection
-            currentSection = newSection
-            
-            if newSection == indexOfLastSelectedCell {
-                collectionView.reloadItems(at: [IndexPath(item: newSection, section: 0)])
-            } else {
-                collectionView.reloadItems(at: [IndexPath(item: newSection, section: 0)])
-                collectionView.reloadItems(at: [IndexPath(item: indexOfLastSelectedCell, section: 0)])
-            }
-            
-            imageManager.imageForAsset(assetAtIndex: newSection,
-                                       forImageSize: CGSize(width: view.frame.width,
-                                                            height: view.frame.height),
-                                        completion: { result in
-                                            self.imageViewBackground.image = result
-                                            
-            })
-        }
+        updateViewBasedOnButtonAngle(angle: value)
     }
     
     func didPressAngleButton() {

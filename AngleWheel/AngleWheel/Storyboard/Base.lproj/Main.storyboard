@@ -25,6 +25,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5U-c4-BaH">
+                                <rect key="frame" x="0.0" y="323" width="375" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAM-UF-ly1">
                                 <rect key="frame" x="37.5" y="39" width="300" height="300"/>
                                 <constraints>
@@ -65,9 +71,13 @@
                             <constraint firstItem="WAM-UF-ly1" firstAttribute="top" secondItem="UxD-Nh-Y3g" secondAttribute="top" constant="19" id="H9d-LM-bNe"/>
                             <constraint firstItem="efg-V3-tSA" firstAttribute="leading" secondItem="UxD-Nh-Y3g" secondAttribute="leading" id="JWD-b1-Exf"/>
                             <constraint firstItem="UxD-Nh-Y3g" firstAttribute="bottom" secondItem="efg-V3-tSA" secondAttribute="bottom" id="Kpf-bw-bfW"/>
+                            <constraint firstItem="w5U-c4-BaH" firstAttribute="centerX" secondItem="YtA-3v-boX" secondAttribute="centerX" id="N5h-xx-du0"/>
+                            <constraint firstItem="w5U-c4-BaH" firstAttribute="centerY" secondItem="YtA-3v-boX" secondAttribute="centerY" id="TLC-He-Shv"/>
                             <constraint firstItem="UxD-Nh-Y3g" firstAttribute="trailing" secondItem="mss-j2-MzL" secondAttribute="trailing" id="UEl-1C-iaZ"/>
                             <constraint firstItem="WAM-UF-ly1" firstAttribute="centerX" secondItem="UxD-Nh-Y3g" secondAttribute="centerX" id="UNJ-Ez-w0l"/>
                             <constraint firstItem="UxD-Nh-Y3g" firstAttribute="trailing" secondItem="gdR-dJ-hnq" secondAttribute="trailing" id="Ual-uI-t3U"/>
+                            <constraint firstItem="UxD-Nh-Y3g" firstAttribute="trailing" secondItem="w5U-c4-BaH" secondAttribute="trailing" id="WmS-ig-pfW"/>
+                            <constraint firstItem="w5U-c4-BaH" firstAttribute="leading" secondItem="UxD-Nh-Y3g" secondAttribute="leading" id="X2a-1l-jQS"/>
                             <constraint firstItem="UxD-Nh-Y3g" firstAttribute="bottom" secondItem="mss-j2-MzL" secondAttribute="bottom" id="XM1-o2-ELK"/>
                             <constraint firstItem="UxD-Nh-Y3g" firstAttribute="trailing" secondItem="efg-V3-tSA" secondAttribute="trailing" id="ZnK-c0-ZvV"/>
                             <constraint firstItem="mss-j2-MzL" firstAttribute="top" secondItem="YtA-3v-boX" secondAttribute="top" id="eki-iO-KDU"/>
@@ -80,6 +90,7 @@
                     <connections>
                         <outlet property="collectionView" destination="gdR-dJ-hnq" id="wNG-BD-D3w"/>
                         <outlet property="imageViewBackground" destination="efg-V3-tSA" id="ZbM-iz-PBQ"/>
+                        <outlet property="labelCameraRollAccessDenied" destination="w5U-c4-BaH" id="vI9-Hg-igf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7a-vq-3Lh" userLabel="First Responder" sceneMemberID="firstResponder"/>
