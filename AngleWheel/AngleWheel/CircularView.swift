@@ -12,10 +12,10 @@ import UIKit
 
     @IBInspectable let lineWidth: CGFloat = 8
     @IBInspectable let lineColor: UIColor = .lightGray
-    var radius: Double
+    var radius: Float
     var path: UIBezierPath!
     
-    init(radius: Double) {
+    init(radius: Float) {
         self.radius = radius
         super.init(frame: CGRect(x:0, y:0, width: 100, height: 100))
     }

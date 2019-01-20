@@ -46,9 +46,9 @@ class MainViewController: UIViewController {
         })
     }
     
-    func sectionForAngle(angle: Int) -> Int {
+    func sectionForAngle(angle: Float) -> Int {
         let totalSections = numberOfImages
-        return Int(floor(Double(angle) / 360.0 * Double(totalSections)))
+        return Int(floor(angle / 360.0 * Float(totalSections)))
     }
 }
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -87,7 +87,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 extension MainViewController: AngleWheelDelegate {
-    func didChangeAngleValue(value: Int) {
+    func didChangeAngleValue(value: Float) {
         let newSection = sectionForAngle(angle: value)
         
         if newSection != currentSection {
