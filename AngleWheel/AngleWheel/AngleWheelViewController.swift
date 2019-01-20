@@ -10,6 +10,7 @@ import UIKit
 
 protocol AngleWheelDelegate: class {
     func didChangeAngleValue(value: Float)
+    func didPressAngleButton()
 }
 
 class AngleWheelViewController: UIViewController {
@@ -70,6 +71,7 @@ class AngleWheelViewController: UIViewController {
         buttonAngle.addGestureRecognizer(holdDownGestureRecognizer)
     }
     
+    // MARK: - Dragging button action
     @objc func dragAngleButton(recognizer: UIPanGestureRecognizer) {
         buttonAngleLocation = recognizer.location(in: self.view);
         let x = Float(buttonAngleLocation.x)
@@ -90,10 +92,12 @@ class AngleWheelViewController: UIViewController {
     
     // MARK: - Button Action
     @objc func buttonAnglePressed() {
+        angleWheelDelegate?.didPressAngleButton()
         fireTimer()
         startSpinning()
     }
     
+    // MARK: - Animations
     func animateToRandomAngle() -> Float {
         let randomAngle = Int.random(in: 0...360)
         let semiCirclePath = UIBezierPath(arcCenter: circularView.center,
@@ -114,10 +118,11 @@ class AngleWheelViewController: UIViewController {
     }
     
     func startSpinning() {
+        let endAngle = CGFloat(CGFloat(buttonAngleDegreesPosition.degreesToRadians()) + (CGFloat(360) * (.pi/180)))
         let circlePath = UIBezierPath(arcCenter: circularView.center,
                                       radius: CGFloat(radius),
                                       startAngle: CGFloat(buttonAngleDegreesPosition.degreesToRadians()),
-                                      endAngle: Math().percentToRadians(startAngle: CGFloat(buttonAngleDegreesPosition.degreesToRadians()),percentComplete: 100),
+                                      endAngle: endAngle,
                                       clockwise: true)
         
         
@@ -130,6 +135,7 @@ class AngleWheelViewController: UIViewController {
         buttonAngle.layer.add(animationRandomLoops, forKey: nil)
     }
     
+    // MARK: - Timer
     func fireTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: {_ in
             let layer = self.buttonAngle.layer.presentation()
@@ -140,6 +146,7 @@ class AngleWheelViewController: UIViewController {
         })
     }
 }
+// MARK: - Animation Delegate
 extension AngleWheelViewController: CAAnimationDelegate {
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
@@ -152,11 +159,5 @@ extension AngleWheelViewController: CAAnimationDelegate {
             self.buttonAngle.setTitle("\(Int(randomAngle))", for: .normal)
             timer.invalidate()
         }
-    }
-}
-class Math {
-    func percentToRadians(startAngle: CGFloat, percentComplete: CGFloat) -> CGFloat {
-        let degrees = (percentComplete/100) * 360
-        return startAngle + (degrees * (.pi/180))
     }
 }

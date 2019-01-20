@@ -16,7 +16,6 @@ class MainViewController: UIViewController {
     let imageManager = ImageManager()
     var numberOfImages = 0
     var currentSection = 0
-    var cellSize: CGFloat!
     weak var angleWheelViewController: AngleWheelViewController!
     
     override func viewDidLoad() {
@@ -35,12 +34,15 @@ class MainViewController: UIViewController {
     }
     
     func setupViewInitialState() {
-        cellSize = (collectionView.frame.size.width/3) - 3
+        loadImages()
+    }
+    
+    func loadImages() {
         numberOfImages = imageManager.loadAssets(numberOfImages: Int.random(in: 1...3))
         self.collectionView.reloadData()
         imageManager.imageForAsset(assetAtIndex: 0,
-                                   forImageSize: CGSize(width: cellSize,
-                                                        height: cellSize),
+                                   forImageSize: CGSize(width: view.frame.width,
+                                                        height: view.frame.height),
                                    completion: {  (result) in
                                     self.imageViewBackground.image = result
         })
@@ -58,9 +60,10 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell {
+            let cellSize = (collectionView.frame.size.width/3) - 3
             imageManager.imageForAsset(assetAtIndex: indexPath.row,
                                        forImageSize: CGSize(width: cellSize,
-                                       height: cellSize),
+                                                            height: cellSize),
                                        completion: {  (result) in
                                         cell.imageViewPhoto.image = result
             })
@@ -90,9 +93,19 @@ extension MainViewController: AngleWheelDelegate {
     func didChangeAngleValue(value: Float) {
         let newSection = sectionForAngle(angle: value)
         
-        if newSection != currentSection {
+        if newSection != currentSection && newSection < imageManager.randomAssets.count {
             currentSection = newSection
-            imageViewBackground.image = imageManager.images[newSection]
+            imageManager.imageForAsset(assetAtIndex: newSection,
+                                       forImageSize: CGSize(width: view.frame.width,
+                                                            height: view.frame.height),
+                                        completion: { result in
+                                            self.imageViewBackground.image = result
+                                            
+            })
         }
+    }
+    
+    func didPressAngleButton() {
+        loadImages()
     }
 }
