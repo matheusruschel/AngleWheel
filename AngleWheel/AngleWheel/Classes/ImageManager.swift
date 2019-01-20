@@ -10,32 +10,26 @@ import Foundation
 import UIKit
 import Photos
 
-enum CameraRollAccessError: Error {
-    case notAllowed
-}
-
 class ImageManager {
     private let manager = PHImageManager.default()
     var randomAssets = [PHAsset]()
+    var assets = [PHAsset]()
     
-    func loadAssets(numberOfImages: Int) throws -> Int {
-        
-        let photosAccess = PHPhotoLibrary.authorizationStatus()
-        if photosAccess == .denied || photosAccess == .notDetermined {
-            throw CameraRollAccessError.notAllowed
-        }
-        
-        var assets = [PHAsset]()
-        randomAssets = []
-        
+    init() {
         let fetchAssets = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: nil)
         fetchAssets.enumerateObjects({ (object, count, stop) in
-            assets.append(object)
+            self.assets.append(object)
         })
+    }
+    
+    func loadAssets(numberOfImages: Int) -> Int {
         
-        for _ in 0..<numberOfImages where assets.count > 0 {
-            let randomIndex = Int.random(in: 0..<assets.count)
-            let randomAsset = assets.remove(at: randomIndex)
+        var assetsCopy = Array(assets)
+        randomAssets = []
+
+        for _ in 0..<numberOfImages where assetsCopy.count > 0 {
+            let randomIndex = Int.random(in: 0..<assetsCopy.count)
+            let randomAsset = assetsCopy.remove(at: randomIndex)
             self.randomAssets.append(randomAsset)
         }
 
@@ -45,12 +39,13 @@ class ImageManager {
     func imageForAsset(assetAtIndex index: Int,
                        forImageSize imageSize: CGSize,
                        completion: @escaping (_ image: UIImage?)-> Void) {
-        
-        manager.requestImage(for: randomAssets[index],
-                             targetSize: imageSize,
-                             contentMode: .aspectFill,
-                             options: nil) { (result, _) in
-                                completion(result)
+        if index < randomAssets.count && index >= 0 {
+            manager.requestImage(for: randomAssets[index],
+                                 targetSize: imageSize,
+                                 contentMode: .aspectFill,
+                                 options: nil) { (result, _) in
+                                    completion(result)
+            }
         }
     }
 

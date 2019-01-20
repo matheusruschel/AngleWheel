@@ -14,7 +14,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageViewBackground: UIImageView!
     @IBOutlet weak var labelCameraRollAccessDenied: UILabel!
-    let imageManager = ImageManager()
+    var imageManager: ImageManager?
     var numberOfImages = 0
     var currentSection = 0
     var indexOfLastSelectedCell = 0
@@ -33,8 +33,27 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupInitalState()
+    }
+    
+    func setupInitalState() {
         PHPhotoLibrary.requestAuthorization({ status in
-            self.loadImages()
+            DispatchQueue.main.async {
+                if status == .authorized {
+                    self.imageManager = ImageManager()
+                    self.loadImages()
+                    self.imageManager?.imageForAsset(assetAtIndex: 0,
+                                                    forImageSize: CGSize(width: self.view.frame.width,
+                                                                         height: self.view.frame.height),
+                                                    completion: {  (result) in
+                                                        DispatchQueue.main.async {
+                                                            self.imageViewBackground.image = result
+                                                        }
+                    })
+                } else {
+                    self.createCameraAccessDeniedMessage()
+                }
+            }
         })
     }
     
@@ -47,20 +66,9 @@ class MainViewController: UIViewController {
     
     // MARK: - Load images
     func loadImages() {
-        DispatchQueue.main.async {
-            if let numberOfImages = try? self.imageManager.loadAssets(numberOfImages: Int.random(in: 10...20)) {
-                self.numberOfImages = numberOfImages
-                self.collectionView.reloadData()
-                self.imageManager.imageForAsset(assetAtIndex: 0,
-                                           forImageSize: CGSize(width: self.view.frame.width,
-                                                                height: self.view.frame.height),
-                                           completion: {  (result) in
-                                            self.imageViewBackground.image = result
-                })
-            } else {
-                self.createCameraAccessDeniedMessage()
-            }
-        }
+        let numberOfImages = self.imageManager?.loadAssets(numberOfImages: Int.random(in: 10...20)) ?? 0
+        self.numberOfImages = numberOfImages
+        self.collectionView.reloadData()
     }
     
     func sectionForAngle(angle: Float) -> Int {
@@ -71,7 +79,7 @@ class MainViewController: UIViewController {
     func updateViewBasedOnButtonAngle(angle: Float) {
         let newSection = sectionForAngle(angle: angle)
         
-        if newSection != currentSection && newSection < imageManager.randomAssets.count {
+        if newSection != currentSection && newSection < imageManager?.randomAssets.count ?? 0 {
             indexOfLastSelectedCell = currentSection
             currentSection = newSection
             DispatchQueue.main.async {
@@ -82,12 +90,13 @@ class MainViewController: UIViewController {
                     self.collectionView.reloadItems(at: [IndexPath(item: self.indexOfLastSelectedCell, section: 0)])
                 }
                 
-                self.imageManager.imageForAsset(assetAtIndex: newSection,
+                self.imageManager?.imageForAsset(assetAtIndex: newSection,
                                                 forImageSize: CGSize(width: self.view.frame.width,
                                                                      height: self.view.frame.height),
                                                 completion: { result in
-                                                    self.imageViewBackground.image = result
-                                                    
+                                                    DispatchQueue.main.async {
+                                                        self.imageViewBackground.image = result
+                                                    }
                 })
             }
         }
@@ -112,11 +121,13 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
             
             let cellSize = (collectionView.frame.size.width/3) - 3
-            imageManager.imageForAsset(assetAtIndex: indexPath.row,
+            imageManager?.imageForAsset(assetAtIndex: indexPath.row,
                                        forImageSize: CGSize(width: cellSize,
                                                             height: cellSize),
                                        completion: {  (result) in
-                                        cell.imageViewPhoto.image = result
+                                        DispatchQueue.main.async {
+                                            cell.imageViewPhoto.image = result
+                                        }
             })
             
             return cell
@@ -152,6 +163,11 @@ extension MainViewController: AngleWheelDelegate {
     }
     
     func didPressAngleButton() {
-        loadImages()
+        let authorization = PHPhotoLibrary.authorizationStatus()
+        if authorization == .authorized {
+            DispatchQueue.main.async {
+                self.loadImages()
+            }
+        }
     }
 }
