@@ -126,7 +126,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let angle: Float = (Float(indexPath.item) / Float(numberOfImages) * 360) + 1
-        angleWheelViewController.animateToAngleWithTimer(angle: angle)
+        angleWheelViewController.animateToAngle(angle: angle)
     }
 }
 // MARK: Collection View Layout

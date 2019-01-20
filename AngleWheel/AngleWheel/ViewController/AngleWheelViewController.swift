@@ -37,12 +37,12 @@ class AngleWheelViewController: UIViewController {
     }
     
     // MARK: - Setup views
-    func setupViews() {
+    private func setupViews() {
         setupCircularView()
         setupAngleButton()
     }
     
-    func setupCircularView() {
+    private func setupCircularView() {
         circularView = CircularView(radius: radius)
         circularView.frame = CGRect(x: 0,
                                     y: 0 ,
@@ -56,7 +56,7 @@ class AngleWheelViewController: UIViewController {
         circularView.addGestureRecognizer(holdDownGestureRecognizer)
     }
     
-    func setupAngleButton() {
+    private func setupAngleButton() {
         buttonAngle = UIButton(frame: CGRect(x: 0,
                                              y: 0,
                                              width: buttonSize,
@@ -103,7 +103,7 @@ class AngleWheelViewController: UIViewController {
     }
     
     // MARK: - Animations
-    func animateToAngle(angle: Float, withKey key: String) {
+    private func animateToAngle(angle: Float, withKey key: String) {
         let semiCirclePath = UIBezierPath(arcCenter: circularView.center,
                                           radius: CGFloat(radius),
                                           startAngle: CGFloat(buttonAngleDegreesPosition.degreesToRadians()),
@@ -121,12 +121,12 @@ class AngleWheelViewController: UIViewController {
         activeAnimation = key
     }
     
-    func animateToAngleWithTimer(angle: Float) {
+    func animateToAngle(angle: Float) {
         fireTimer()
         animateToAngle(angle: angle,withKey: AngleWheelViewController.singleMoveAnimationId)
     }
     
-    func startSpinning() {
+    private func startSpinning() {
         let endAngle = CGFloat(CGFloat(buttonAngleDegreesPosition.degreesToRadians()) + (CGFloat(360) * (.pi/180)))
         let circlePath = UIBezierPath(arcCenter: circularView.center,
                                       radius: CGFloat(radius),
@@ -146,7 +146,7 @@ class AngleWheelViewController: UIViewController {
     }
     
     // MARK: - Timer
-    func fireTimer() {
+    private func fireTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: {_ in
             let layer = self.buttonAngle.layer.presentation()
             let point = CGPoint(x: layer!.frame.midX, y: layer!.frame.midY)
