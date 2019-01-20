@@ -19,13 +19,17 @@ class AngleWheelViewController: UIViewController {
     var buttonAngle: UIButton!
     var buttonAngleLocation: CGPoint = CGPoint.zero
     var radius: Float = 125.0
-    var min: Int = 0
-    var max: Int = 360
     var buttonAngleDegreesPosition: Float = 0
     var timer: Timer!
-    var wheelStoppedSpinningAnimation = false
-    var randomAngle: Float = 0
+    var randomAngle: Float = 0 
+    var buttonAngleColor: UIColor = UIColor(displayP3Red: 14 / 255, green: 172 / 255, blue: 81 / 255, alpha: 1)
+    var buttonAngleTextColor: UIColor = .white
+    var buttonSize: CGFloat = 50
+    var activeAnimation: String?
     weak var angleWheelDelegate: AngleWheelDelegate?
+    static let spinningId = "spinning"
+    static let singleMoveAnimationId = "singleMoveAnimation"
+    static let animateToFinalPositionId = "animateToFinalPosition"
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -55,14 +59,15 @@ class AngleWheelViewController: UIViewController {
     func setupAngleButton() {
         buttonAngle = UIButton(frame: CGRect(x: 0,
                                              y: 0,
-                                             width: 40,
-                                             height: 40))
+                                             width: buttonSize,
+                                             height: buttonSize))
         
         buttonAngle.center = buttonAngleDegreesPosition.degreesAngleToPoint(withRadius: radius, inRect: circularView.frame)
         buttonAngle.setTitle("\(Int(buttonAngleDegreesPosition))", for: .normal)
         buttonAngle.addTarget(self, action: #selector(buttonAnglePressed), for: .touchUpInside)
-        buttonAngle.setTitleColor(.black, for: .normal)
-        buttonAngle.backgroundColor = .red
+        buttonAngle.setTitleColor(buttonAngleTextColor, for: .normal)
+        buttonAngle.backgroundColor = buttonAngleColor
+        buttonAngle.titleLabel?.font = .boldSystemFont(ofSize: 17)
         buttonAngle.layer.cornerRadius = 0.5 * buttonAngle.bounds.size.width
         buttonAngle.clipsToBounds = true
         view.addSubview(buttonAngle)
@@ -98,12 +103,11 @@ class AngleWheelViewController: UIViewController {
     }
     
     // MARK: - Animations
-    func animateToRandomAngle() -> Float {
-        let randomAngle = Int.random(in: 0...360)
+    func animateToAngle(angle: Float, withKey key: String) {
         let semiCirclePath = UIBezierPath(arcCenter: circularView.center,
                                           radius: CGFloat(radius),
                                           startAngle: CGFloat(buttonAngleDegreesPosition.degreesToRadians()),
-                                          endAngle: CGFloat(Float(randomAngle).degreesToRadians()),
+                                          endAngle: CGFloat(angle.degreesToRadians()),
                                           clockwise: true)
         let animation = CAKeyframeAnimation(keyPath: "position")
         animation.duration = 1
@@ -112,9 +116,14 @@ class AngleWheelViewController: UIViewController {
         animation.delegate = self
         animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         buttonAngle.layer.add(animation, forKey: nil)
-        self.buttonAngle.center = Float(randomAngle).degreesAngleToPoint(withRadius: self.radius, inRect: self.circularView.frame)
-        self.buttonAngleDegreesPosition = Float(randomAngle)
-        return Float(randomAngle)
+        self.buttonAngle.center = angle.degreesAngleToPoint(withRadius: self.radius, inRect: self.circularView.frame)
+        self.buttonAngleDegreesPosition = angle
+        activeAnimation = key
+    }
+    
+    func animateToAngleWithTimer(angle: Float) {
+        fireTimer()
+        animateToAngle(angle: angle,withKey: AngleWheelViewController.singleMoveAnimationId)
     }
     
     func startSpinning() {
@@ -133,6 +142,7 @@ class AngleWheelViewController: UIViewController {
         animationRandomLoops.repeatCount = Float(repeatCount)
         animationRandomLoops.path = circlePath.cgPath
         buttonAngle.layer.add(animationRandomLoops, forKey: nil)
+        activeAnimation = AngleWheelViewController.spinningId
     }
     
     // MARK: - Timer
@@ -151,12 +161,14 @@ extension AngleWheelViewController: CAAnimationDelegate {
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         self.buttonAngle.setTitle("\(Int(self.buttonAngleDegreesPosition))", for: .normal)
-        wheelStoppedSpinningAnimation = !wheelStoppedSpinningAnimation
         
-        if wheelStoppedSpinningAnimation {
-            randomAngle = animateToRandomAngle()
-        } else {
+        if activeAnimation == AngleWheelViewController.spinningId {
+            randomAngle = Float(Int.random(in: 0...360))
+            animateToAngle(angle: randomAngle, withKey: AngleWheelViewController.animateToFinalPositionId)
+        } else if activeAnimation == AngleWheelViewController.animateToFinalPositionId {
             self.buttonAngle.setTitle("\(Int(randomAngle))", for: .normal)
+            timer.invalidate()
+        } else {
             timer.invalidate()
         }
     }

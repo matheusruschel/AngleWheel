@@ -11,7 +11,8 @@ import UIKit
 @IBDesignable class CircularView: UIView {
 
     @IBInspectable let lineWidth: CGFloat = 8
-    @IBInspectable let lineColor: UIColor = .lightGray
+    @IBInspectable let lineColor: UIColor = UIColor(displayP3Red: 44 / 255, green: 62 / 255, blue: 80 / 255, alpha: 1)
+    @IBInspectable var alphaComponent: CGFloat = 1
     var radius: Float
     var path: UIBezierPath!
     
@@ -31,7 +32,7 @@ import UIKit
                                 startAngle: CGFloat(0),
                                 endAngle:CGFloat(Double.pi * 2),
                                 clockwise: true)
-        lineColor.withAlphaComponent(0.6).setStroke()
+        lineColor.withAlphaComponent(alphaComponent).setStroke()
         path.lineWidth = lineWidth
         path.stroke()
     }

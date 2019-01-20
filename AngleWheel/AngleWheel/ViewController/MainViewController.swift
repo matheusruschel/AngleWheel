@@ -16,11 +16,13 @@ class MainViewController: UIViewController {
     let imageManager = ImageManager()
     var numberOfImages = 0
     var currentSection = 0
+    var labelMsgCameraRollAccessNotAllowed: UILabel?
+    var indexOfLastSelectedCell = 0
     weak var angleWheelViewController: AngleWheelViewController!
     
+    // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "PhotoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PhotoCollectionViewCell")
@@ -30,22 +32,34 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupViewInitialState()
-    }
-    
-    func setupViewInitialState() {
         loadImages()
     }
     
+    // MARK: - Initialize camera access denied label
+    func createCameraAccessDeniedMessage() {
+        labelMsgCameraRollAccessNotAllowed?.removeFromSuperview()
+        labelMsgCameraRollAccessNotAllowed = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 80))
+        labelMsgCameraRollAccessNotAllowed?.text = "Camera roll access was denied."
+        labelMsgCameraRollAccessNotAllowed?.textColor = .black
+        labelMsgCameraRollAccessNotAllowed?.textAlignment = .center
+        self.view.addSubview(labelMsgCameraRollAccessNotAllowed!)
+        labelMsgCameraRollAccessNotAllowed?.center = self.view.center
+    }
+    
+    // MARK: - Load images
     func loadImages() {
-        numberOfImages = imageManager.loadAssets(numberOfImages: Int.random(in: 1...3))
-        self.collectionView.reloadData()
-        imageManager.imageForAsset(assetAtIndex: 0,
-                                   forImageSize: CGSize(width: view.frame.width,
-                                                        height: view.frame.height),
-                                   completion: {  (result) in
-                                    self.imageViewBackground.image = result
-        })
+        if let numberOfImages = try? imageManager.loadAssets(numberOfImages: Int.random(in: 10...20)) {
+            self.numberOfImages = numberOfImages
+            self.collectionView.reloadData()
+            imageManager.imageForAsset(assetAtIndex: 0,
+                                       forImageSize: CGSize(width: view.frame.width,
+                                                            height: view.frame.height),
+                                       completion: {  (result) in
+                                        self.imageViewBackground.image = result
+            })
+        } else {
+            createCameraAccessDeniedMessage()
+        }
     }
     
     func sectionForAngle(angle: Float) -> Int {
@@ -53,6 +67,7 @@ class MainViewController: UIViewController {
         return Int(floor(angle / 360.0 * Float(totalSections)))
     }
 }
+// MARK: - Collection view delegate/datasource
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfImages
@@ -60,6 +75,16 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell {
+            
+            if currentSection == indexPath.item {
+                let selectedColor = UIColor(displayP3Red: 14 / 255, green: 172 / 255, blue: 81 / 255, alpha: 1)
+                cell.layer.borderColor = selectedColor.cgColor
+                cell.layer.borderWidth = 3
+            } else {
+                cell.layer.borderColor = UIColor.clear.cgColor
+                cell.layer.borderWidth = 3
+            }
+            
             let cellSize = (collectionView.frame.size.width/3) - 3
             imageManager.imageForAsset(assetAtIndex: indexPath.row,
                                        forImageSize: CGSize(width: cellSize,
@@ -72,8 +97,13 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
         return UICollectionViewCell()
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let angle: Float = (Float(indexPath.item) / Float(numberOfImages) * 360) + 1
+        angleWheelViewController.animateToAngleWithTimer(angle: angle)
+    }
 }
-// MARK: <UICollectionViewDelegateFlowLayout>
+// MARK: Collection View Layout
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView( _ collectionView: UICollectionView,
@@ -89,12 +119,22 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: cellLeg,height: cellLeg)
     }
 }
+// MARK: AngleWheelDelegate
 extension MainViewController: AngleWheelDelegate {
     func didChangeAngleValue(value: Float) {
         let newSection = sectionForAngle(angle: value)
         
         if newSection != currentSection && newSection < imageManager.randomAssets.count {
+            indexOfLastSelectedCell = currentSection
             currentSection = newSection
+            
+            if newSection == indexOfLastSelectedCell {
+                collectionView.reloadItems(at: [IndexPath(item: newSection, section: 0)])
+            } else {
+                collectionView.reloadItems(at: [IndexPath(item: newSection, section: 0)])
+                collectionView.reloadItems(at: [IndexPath(item: indexOfLastSelectedCell, section: 0)])
+            }
+            
             imageManager.imageForAsset(assetAtIndex: newSection,
                                        forImageSize: CGSize(width: view.frame.width,
                                                             height: view.frame.height),
